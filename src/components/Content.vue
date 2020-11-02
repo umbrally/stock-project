@@ -22,7 +22,7 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <div class="mt-5">2. 選擇參數</div>
+      <div>2. 選擇參數</div>
       <v-row>
         <v-col cols="12">
           <v-select
@@ -61,17 +61,23 @@ export default {
   computed: {
     predictedHighPrice() {
       if (this.highPoint && this.lowPoint && this.selectedParameter) {
-        const diff = this.highPoint - this.lowPoint;
-        const result = diff * this.selectedParameter + this.lowPoint;
-        return Number.parseFloat(result).toFixed(2);
+        const highPoint = Number.parseFloat(this.highPoint);
+        const lowPoint = Number.parseFloat(this.lowPoint);
+        const selectedParameter = Number.parseFloat(this.selectedParameter);
+        const diff = highPoint - lowPoint;
+        const result = diff * selectedParameter + lowPoint;
+        return result.toFixed(2);
       }
       return 0;
     },
     predictedHLowPrice() {
       if (this.highPoint && this.lowPoint && this.selectedParameter) {
-        const diff = this.highPoint - this.lowPoint;
-        const result = this.highPoint - diff * this.selectedParameter;
-        return Number.parseFloat(result).toFixed(2);
+        const highPoint = Number.parseFloat(this.highPoint);
+        const lowPoint = Number.parseFloat(this.lowPoint);
+        const selectedParameter = Number.parseFloat(this.selectedParameter);
+        const diff = highPoint - lowPoint;
+        const result = highPoint - diff * selectedParameter;
+        return result.toFixed(2);
       }
       return 0;
     },
